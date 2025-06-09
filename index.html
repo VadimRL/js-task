@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS task Chapter 0</title>
+	<style>
+		ol {
+		  counter-reset: item
+		}
+		li {
+		  display: block
+		}
+		li:before {
+		  content: counters(item, ".") ". ";
+		  counter-increment: item
+		}
+	</style>
+</head>
+<body>
+	<h1>Демонстрація робити фунцій "sum" та "unique"</h1>
+	<div id="output"></div>
+	<script>
+		// 1. Використовуючи ES6+ синтаксис, реалізувати функції:
+		// тестові дані
+		const numbers = [1, 1, 2, 3, 4, 4, 5, 6, 6, 7];
+		// контайнер
+		const output = document.querySelector('#output');
+
+		function sum(array) {
+			return array.reduce((sum, current) => sum + current, 0);
+		}
+
+		function unique(array) {
+			const uniqueNumbers = new Set(array);
+			const uniqueArray = Array.from(uniqueNumbers)
+			return uniqueArray;
+		}
+
+		output.innerHTML = `
+		<ol>
+		<li>Візмемо масив чисел - ${numbers.join(", ")}</li>
+		<li>Отримаємо суму чисел масиву за допомогою фунції "sum" - ${sum(numbers)}</li>
+		<li>Унікальні числа масиву "unique" фунції - ${unique(numbers).join(", ")}</li>
+		</ol>
+		<h2>Тіло функції "sum"</h2>
+		<pre>
+		<code>
+		function sum(array) {
+			return array.reduce((sum, current) => sum + current, 0);
+		}
+		</code>
+		</pre>
+		<h2>Тіло функції "unique"</h2>
+		<pre>
+		<code>
+		function unique(array) {
+			const uniqueNumbers = new Set(array);
+			const uniqueArray = Array.from(uniqueNumbers)
+			return uniqueArray;
+		}
+		</code>
+		</pre>
+		`;
+
+		// 2. Домашня робота з асинхронності
+		// Теcтові дані користувачів
+		const URL = "https://jsonplaceholder.typicode.com/users";
+
+		const getUserData = async (url) => {
+			return usersData = await fetch(url).then(r => r.json());
+		};
+
+		async function displayUsersData() {
+			const usersData = await getUserData(URL);
+			const title = document.createElement("h2");
+			const usersList = document.createElement("ol");
+
+			title.textContent = "Імена та email костувачів";
+
+			usersData.forEach(user => {
+				const {id, name, email} = user;
+				usersList.innerHTML += `
+					<li>Користувач №${id}
+						<ol>
+							<li>Ім'я користувача: <b>${name}</b></li>
+							<li>Електронна пошта користувача: <b>${email}</b></li>
+						</ol>
+					</li>
+				`;
+			});
+
+			document.body.append(title);
+			document.body.append(usersList);
+		}
+
+		displayUsersData();
+
+	</script>
+</body>
+</html>
