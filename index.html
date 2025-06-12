@@ -28,10 +28,18 @@
 		const output = document.querySelector('#output');
 
 		function sum(array) {
+			if (!Array.isArray(array)) {
+				console.error(`Некоректний тип даних: ${array}. Повинен бути масив`);
+			    return;
+			}
 			return array.reduce((sum, current) => sum + current, 0);
 		}
 
 		function unique(array) {
+			if (!Array.isArray(array)) {
+				console.error(`Некоректний тип даних: ${array}. Повинен бути масив`);
+			    return;
+			}
 			const uniqueNumbers = new Set(array);
 			const uniqueArray = Array.from(uniqueNumbers)
 			return uniqueArray;
@@ -41,7 +49,7 @@
 		<ol>
 		<li>Візмемо масив чисел - ${numbers.join(", ")}</li>
 		<li>Отримаємо суму чисел масиву за допомогою фунції "sum" - ${sum(numbers)}</li>
-		<li>Унікальні числа масиву "unique" фунції - ${unique(numbers).join(", ")}</li>
+		<li>Унікальні числа масиву "unique" фунції - ${unique(numbers)?.join(", ")}</li>
 		</ol>
 		<h2>Тіло функції "sum"</h2>
 		<pre>
